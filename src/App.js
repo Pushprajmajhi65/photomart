@@ -138,6 +138,15 @@ function AppContent() {
             <div className="anim-cube a1"></div>
             <div className="anim-cube a2"></div>
             <div className="anim-cube a3"></div>
+            <div className="anim-cube a4"></div>
+            <div className="anim-cube a5"></div>
+            <div className="anim-cube a6"></div>
+            <div className="anim-cube a7"></div>
+            <div className="anim-cube a8"></div>
+            <div className="anim-cube a9"></div>
+            <div className="anim-cube a10"></div>
+            <div className="anim-cube a11"></div>
+            <div className="anim-cube a12"></div>
             <div className="anim-pill p1"></div>
             <div className="anim-pill p2"></div>
           </div>
