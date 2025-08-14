@@ -134,61 +134,43 @@ function AppContent() {
       {/* Hero */}
       <section className="hero-section">
         <div className="hero-bg">
-          <div className="hero-carousel">
-            <div className="slide s1"></div>
-            <div className="slide s2"></div>
-            <div className="slide s3"></div>
+          <div className="hero-anim-bg">
+            <div className="anim-cube a1"></div>
+            <div className="anim-cube a2"></div>
+            <div className="anim-cube a3"></div>
+            <div className="anim-pill p1"></div>
+            <div className="anim-pill p2"></div>
           </div>
         </div>
         <div className="hero-inner">
           <h1 className="hero-title">Premium Personalized Canvas Photo Frames</h1>
           <p className="hero-subtitle">Preserve your best memories in stunning detail — crafted with museum-quality printing and premium wood frames.</p>
-          <div className="cta-buttons">
-            <motion.button className="cta-primary" onClick={() => navigateToPage('editor')} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>Create Your Frame</motion.button>
-            <motion.button className="cta-secondary" onClick={() => navigateToPage('custom')} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>Upload Your Photo</motion.button>
-          </div>
         </div>
       </section>
 
-      {/* Visual frames teaser */}
-      <main className="main-content">
-        <div className="frames-container">
-          <motion.div className="frame frame-left" whileHover={{ scale: 1.05, rotate: -5, boxShadow: "0 20px 40px rgba(146, 66, 241, 0.3)" }} transition={{ duration: 0.3 }}>
-            <div className="frame-content">
-              {uploadedImages.frame1 ? <img src={uploadedImages.frame1} alt="Uploaded artwork" className="uploaded-image" /> : <div className="placeholder"><div className="upload-icon">📷</div><p>Upload Image</p></div>}
-              <input type="file" accept="image/*" onChange={(e) => handleImageUpload('frame1', e)} className="file-input" id="frame1-input" />
-              <label htmlFor="frame1-input" className="upload-label">Choose Image</label>
-            </div>
-          </motion.div>
-
-          <motion.div className="frame frame-center" whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(146, 66, 241, 0.3)" }} transition={{ duration: 0.3 }}>
-            <div className="frame-content">
-              {uploadedImages.frame2 ? <img src={uploadedImages.frame2} alt="Uploaded artwork" className="uploaded-image" /> : <div className="placeholder"><div className="upload-icon">🎨</div><p>Upload Image</p></div>}
-              <input type="file" accept="image/*" onChange={(e) => handleImageUpload('frame2', e)} className="file-input" id="frame2-input" />
-              <label htmlFor="frame2-input" className="upload-label">Choose Image</label>
-            </div>
-          </motion.div>
-
-          <motion.div className="frame frame-right" whileHover={{ scale: 1.05, rotate: 5, boxShadow: "0 20px 40px rgba(146, 66, 241, 0.3)" }} transition={{ duration: 0.3 }}>
-            <div className="frame-content">
-              {uploadedImages.frame3 ? <img src={uploadedImages.frame3} alt="Uploaded artwork" className="uploaded-image" /> : <div className="placeholder"><div className="upload-icon">🖼️</div><p>Upload Image</p></div>}
-              <input type="file" accept="image/*" onChange={(e) => handleImageUpload('frame3', e)} className="file-input" id="frame3-input" />
-              <label htmlFor="frame3-input" className="upload-label">Choose Image</label>
-            </div>
-          </motion.div>
+      {/* Premium landing cards */}
+      <section className="landing-cards">
+        <div className="landing-card landing-card--large">
+          <div className="landing-card__icon">📁</div>
+          <h2>Collection</h2>
+          <p>Premium art canvases curated by designers</p>
+          <div className="landing-card__media"></div>
         </div>
-      </main>
-
-      {/* Features */}
-      <section className="section features">
-        <h2 className="section-title">Why You'll Love Our Canvas Frames</h2>
-        <div className="features-grid">
-          <div className="feature"><div className="icon">🏛️</div><h3>Museum-Quality Printing</h3><p>Sharp, vibrant prints that stand the test of time.</p></div>
-          <div className="feature"><div className="icon">🪵</div><h3>Premium Wood Frames</h3><p>Solid wooden build with fade-resistant inks.</p></div>
-          <div className="feature"><div className="icon">⬆️</div><h3>Easy Upload</h3><p>Upload and preview your photo in seconds.</p></div>
-          <div className="feature"><div className="icon">📏</div><h3>Custom Sizes</h3><p>Pick from multiple sizes or define your own.</p></div>
+        <div className="landing-card landing-card--sm">
+          <div className="landing-card__icon">🎨</div>
+          <h3>Custom Canvas</h3>
+          <p>Create your own canvas</p>
+          <div className="landing-card__media"></div>
+        </div>
+        <div className="landing-card landing-card--sm">
+          <div className="landing-card__icon">🎁</div>
+          <h3>Gifts</h3>
+          <p>Personalized items</p>
+          <div className="landing-card__media"></div>
         </div>
       </section>
+
+      {/* Features removed as requested */}
 
       {/* Our Collection */}
       <section className="section collection-showcase">
