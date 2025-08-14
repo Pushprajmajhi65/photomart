@@ -1633,7 +1633,7 @@ html {
 .hero-section { position: relative; padding-top: 100px; padding-bottom: 40px; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
 .hero-anim-bg { position: absolute; inset: 0; overflow: hidden; }
-.anim-cube { position: absolute; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, rgba(146,66,241,.28), rgba(168,85,243,.22)); box-shadow: 0 8px 18px rgba(146,66,241,.14); opacity: .9; will-change: transform; pointer-events: none; animation: drift 12s ease-in-out infinite; transform: translate3d(0,0,0); }
+.anim-cube { position: absolute; width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg, rgba(146,66,241,.28), rgba(168,85,243,.22)); box-shadow: 0 6px 14px rgba(146,66,241,.14); opacity: .9; will-change: transform; pointer-events: none; animation: drift 6s ease-in-out infinite; transform: translate3d(0,0,0); }
 .anim-cube.a1 { top: 8%; left: 6%; animation-delay: 0s; }
 .anim-cube.a2 { top: 24%; left: 18%; animation-delay: 1.2s; }
 .anim-cube.a3 { top: 12%; left: 48%; animation-delay: 2.4s; }
@@ -1646,7 +1646,7 @@ html {
 .anim-cube.a10 { top: 82%; left: 45%; animation-delay: 6.0s; }
 .anim-cube.a11 { top: 84%; left: 68%; animation-delay: 6.8s; }
 .anim-cube.a12 { top: 36%; left: 86%; animation-delay: 1.8s; }
-.anim-pill { position: absolute; width: 160px; height: 44px; border-radius: 999px; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.35), rgba(146,66,241,.15)); box-shadow: 0 10px 24px rgba(0,0,0,.10); filter: blur(0.4px); will-change: transform; pointer-events: none; animation: floatX 14s ease-in-out infinite; transform: translate3d(0,0,0); }
+.anim-pill { position: absolute; width: 120px; height: 32px; border-radius: 999px; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.35), rgba(146,66,241,.15)); box-shadow: 0 8px 20px rgba(0,0,0,.10); filter: blur(0.4px); will-change: transform; pointer-events: none; animation: floatX 7s ease-in-out infinite; transform: translate3d(0,0,0); }
 .anim-pill.p1 { top: 18%; left: 50%; transform: translateX(-50%); animation-delay: 2s; }
 .anim-pill.p2 { bottom: 16%; left: 18%; width: 200px; animation-delay: 6s; }
 @keyframes drift { 0%,100% { transform: translate3d(0,0,0) rotate(0deg); } 50% { transform: translate3d(0,-30px,0) rotate(8deg); } }
@@ -1670,6 +1670,7 @@ html {
 .landing-card h2, .landing-card h3 { margin: 12px 0 0; color: #1e1e2d; }
 .landing-card p { margin: 0; color: #7a7a86; }
 .landing-card__media { margin-top: 16px; height: 260px; border-radius: 18px; background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid rgba(146,66,241,.18); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.landing-card--xl .landing-card__media { height: 320px; }
 .landing-card__media.is-placeholder { background: linear-gradient(135deg, #f3f3f7, #ececfa); display: grid; place-items: center; }
 .landing-card--left { z-index: 1; }
 .landing-card--right { z-index: 1; }
