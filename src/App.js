@@ -150,23 +150,40 @@ function AppContent() {
 
       {/* Premium landing cards */}
       <section className="landing-cards">
-        <div className="landing-card landing-card--large">
-          <div className="landing-card__icon">📁</div>
-          <h2>Collection</h2>
-          <p>Premium art canvases curated by designers</p>
-          <div className="landing-card__media"></div>
-        </div>
-        <div className="landing-card landing-card--sm">
+        {/* Left - Custom Canvas */}
+        <div className="landing-card landing-card--sm landing-card--left">
           <div className="landing-card__icon">🎨</div>
           <h3>Custom Canvas</h3>
-          <p>Create your own canvas</p>
-          <div className="landing-card__media"></div>
+          <p>Create Your Own Canvas</p>
+          <div className="landing-card__media is-placeholder"></div>
         </div>
-        <div className="landing-card landing-card--sm">
+
+        {/* Center - Collection (primary focus) */}
+        <div className="landing-card landing-card--xl landing-card--center">
+          <div className="landing-card__icon">📁</div>
+          <h2>Collection</h2>
+          <p>Premium Art Canvas</p>
+          <div
+            className="landing-card__media"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1540574173026-643ea20ade25?q=80&w=1600&auto=format&fit=crop')",
+            }}
+          />
+        </div>
+
+        {/* Right - Gifts */}
+        <div className="landing-card landing-card--sm landing-card--right">
           <div className="landing-card__icon">🎁</div>
           <h3>Gifts</h3>
-          <p>Personalized items</p>
-          <div className="landing-card__media"></div>
+          <p>Personalized Items</p>
+          <div
+            className="landing-card__media"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1585386959984-a4155223168f?q=80&w=1600&auto=format&fit=crop')",
+            }}
+          />
         </div>
       </section>
 

@@ -1633,13 +1633,22 @@ html {
 .hero-section { position: relative; padding-top: 100px; padding-bottom: 40px; }
 .hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
 .hero-anim-bg { position: absolute; inset: 0; overflow: hidden; }
-.anim-cube { position: absolute; width: 160px; height: 160px; border-radius: 20px; background: linear-gradient(135deg, rgba(146,66,241,.25), rgba(168,85,243,.25)); box-shadow: 0 30px 80px rgba(146,66,241,.15); filter: blur(0.2px); animation: drift 18s ease-in-out infinite; }
-.anim-cube.a1 { top: 10%; left: 8%; animation-delay: 0s; }
-.anim-cube.a2 { bottom: 12%; right: 12%; width: 200px; height: 200px; animation-delay: 4s; }
-.anim-cube.a3 { top: 40%; right: 30%; width: 120px; height: 120px; animation-delay: 8s; }
-.anim-pill { position: absolute; width: 260px; height: 70px; border-radius: 999px; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.35), rgba(146,66,241,.15)); box-shadow: 0 20px 60px rgba(0,0,0,.12); filter: blur(1px); animation: floatX 14s ease-in-out infinite; }
-.anim-pill.p1 { top: 20%; left: 50%; transform: translateX(-50%); animation-delay: 2s; }
-.anim-pill.p2 { bottom: 18%; left: 20%; width: 320px; animation-delay: 6s; }
+.anim-cube { position: absolute; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, rgba(146,66,241,.28), rgba(168,85,243,.22)); box-shadow: 0 16px 40px rgba(146,66,241,.18); filter: blur(0.2px); animation: drift 12s ease-in-out infinite; }
+.anim-cube.a1 { top: 8%; left: 6%; animation-delay: 0s; }
+.anim-cube.a2 { top: 24%; left: 18%; animation-delay: 1.2s; }
+.anim-cube.a3 { top: 12%; left: 48%; animation-delay: 2.4s; }
+.anim-cube.a4 { top: 30%; left: 70%; animation-delay: 3.6s; }
+.anim-cube.a5 { top: 55%; left: 10%; animation-delay: 0.8s; }
+.anim-cube.a6 { top: 62%; left: 32%; animation-delay: 2.0s; }
+.anim-cube.a7 { top: 48%; left: 52%; animation-delay: 3.2s; }
+.anim-cube.a8 { top: 68%; left: 72%; animation-delay: 4.4s; }
+.anim-cube.a9 { top: 78%; left: 22%; animation-delay: 5.2s; }
+.anim-cube.a10 { top: 82%; left: 45%; animation-delay: 6.0s; }
+.anim-cube.a11 { top: 84%; left: 68%; animation-delay: 6.8s; }
+.anim-cube.a12 { top: 36%; left: 86%; animation-delay: 1.8s; }
+.anim-pill { position: absolute; width: 160px; height: 44px; border-radius: 999px; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.35), rgba(146,66,241,.15)); box-shadow: 0 12px 36px rgba(0,0,0,.12); filter: blur(0.6px); animation: floatX 14s ease-in-out infinite; }
+.anim-pill.p1 { top: 18%; left: 50%; transform: translateX(-50%); animation-delay: 2s; }
+.anim-pill.p2 { bottom: 16%; left: 18%; width: 200px; animation-delay: 6s; }
 @keyframes drift { 0%,100% { transform: translate3d(0,0,0) rotate(0deg); } 50% { transform: translate3d(0,-30px,0) rotate(8deg); } }
 @keyframes floatX { 0%,100% { transform: translateX(0) translateY(0); } 50% { transform: translateX(30px) translateY(-12px); } }
 
@@ -1652,19 +1661,21 @@ html {
 .section { padding: 60px 20px; }
 .section-title { text-align: center; font-size: 2rem; font-weight: 700; margin: 0 auto 28px; max-width: 800px; background: linear-gradient(135deg, #9242F1, #a855f3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* Landing cards */
-.landing-cards { max-width: 1200px; margin: 20px auto 0; padding: 0 20px 40px; display: grid; grid-template-columns: 1.2fr .9fr .9fr; gap: 22px; align-items: stretch; }
-.landing-card { background: rgba(255,255,255,.92); border: 1px solid rgba(146,66,241,.14); border-radius: 24px; box-shadow: 0 20px 60px rgba(146,66,241,.12); backdrop-filter: blur(10px); padding: 22px; display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
-.landing-card:hover { transform: translateY(-6px); box-shadow: 0 30px 80px rgba(146,66,241,.18); }
-.landing-card--large { grid-row: span 2; }
-.landing-card__icon { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, #9242F1, #a855f3); color: #fff; font-size: 22px; box-shadow: 0 10px 26px rgba(146,66,241,.25); }
-.landing-card h2, .landing-card h3 { margin: 8px 0 0; }
-.landing-card p { margin: 0; color: #5c5c5c; }
-.landing-card__media { margin-top: auto; height: 220px; border-radius: 16px; background: linear-gradient(135deg, rgba(146,66,241,.12), rgba(168,85,243,.12)); border: 1px dashed rgba(146,66,241,.35); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6); }
+.landing-cards { max-width: 1200px; margin: 30px auto 0; padding: 0 20px 80px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; align-items: stretch; }
+.landing-card { background: rgba(255,255,255,.96); border: 1px solid rgba(146,66,241,.22); border-radius: 24px; box-shadow: 0 22px 70px rgba(146,66,241,.16), 0 20px 50px rgba(0,0,0,.06); backdrop-filter: blur(12px); padding: 26px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
+.landing-card:hover { transform: translateY(-10px); box-shadow: 0 36px 100px rgba(146,66,241,.22), 0 24px 60px rgba(0,0,0,.08); }
+.landing-card--xl { transform: scale(1.06); z-index: 2; }
+.landing-card__icon { width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, #b9a5f7, #cbb7fb); color: #fff; font-size: 22px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 12px 30px rgba(146,66,241,.25); }
+.landing-card h2, .landing-card h3 { margin: 12px 0 0; color: #1e1e2d; }
+.landing-card p { margin: 0; color: #7a7a86; }
+.landing-card__media { margin-top: 16px; height: 260px; border-radius: 18px; background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid rgba(146,66,241,.18); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.landing-card__media.is-placeholder { background: linear-gradient(135deg, #f3f3f7, #ececfa); display: grid; place-items: center; }
+.landing-card--left { transform: translateX(-20px); }
+.landing-card--right { transform: translateX(20px); }
 
 @media (max-width: 960px) {
   .landing-cards { grid-template-columns: 1fr; }
-  .landing-card--large { grid-row: auto; }
+  .landing-card--xl, .landing-card--left, .landing-card--right { transform: none; }
 }
 
 /* Use cases */
