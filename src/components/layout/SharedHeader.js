@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function SharedHeader({ toggleMenu, toggleCart, getCartItemCount }) {
   return (
@@ -17,6 +18,10 @@ export default function SharedHeader({ toggleMenu, toggleCart, getCartItemCount 
           <span className="bar"></span>
         </div>
       </motion.button>
+
+      <Link to="/" className="brand-logo" aria-label="Frameio home">
+        <span className="brand-logo-text"><span className="brand-f">F</span>rameio</span>
+      </Link>
 
       <motion.button
         className="cart-toggle"
