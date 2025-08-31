@@ -943,6 +943,17 @@
   }
 }
 
+/* 320px support */
+@media (max-width: 360px) {
+  .editor-header { padding: 8px 12px; }
+  .editor-content { grid-template-columns: 1fr; }
+  .editor-sidebar { padding: 12px; }
+  .editor-preview { padding: 12px; }
+  .preview-frame { transform: scale(0.52); }
+  .quick-actions { grid-template-columns: 1fr; }
+  .add-to-cart-editor { width: 100%; text-align: center; }
+}
+
 /* Canvas 3D Structure */
 .canvas-3d-container {
   position: relative;

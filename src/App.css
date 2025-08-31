@@ -315,6 +315,24 @@
 }
 
 @media (max-width: 480px) {
+  .hero-title-collection, .category-hero-title { font-size: 2rem; }
+  .hero-subtitle-collection, .category-hero-description { font-size: 1rem; }
+  .collection-filters { padding: 20px 12px; }
+  .filter-section { gap: 16px; }
+  .category-products { padding: 40px 12px; }
+  .category-products-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .category-product-card { border-radius: 14px; }
+}
+
+/* 320px support */
+@media (max-width: 360px) {
+  .category-products-grid { grid-template-columns: 1fr; gap: 14px; }
+  .products-grid-modern { grid-template-columns: 1fr; gap: 14px; }
+  .collection-grid { grid-template-columns: 1fr; gap: 14px; }
+  .footer-button { width: 100%; }
+  .footer-content { gap: 10px; }
+  .header { left: 8px; }
+
   .frame {
     width: 100px;
     height: 130px;
@@ -526,7 +544,7 @@ html {
 
 .products-grid-modern {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 30px;
 }
 
@@ -1257,6 +1275,161 @@ html {
   margin: 0;
 }
 
+.collection-filters {
+  background: white;
+  padding: 40px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filter-group h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.category-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.category-filter-btn {
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-filter-btn:hover {
+  border-color: #9242F1;
+  color: #9242F1;
+  transform: translateY(-2px);
+}
+
+.category-filter-btn.active {
+  background: #9242F1;
+  border-color: #9242F1;
+  color: white;
+  box-shadow: 0 4px 15px rgba(146, 66, 241, 0.3);
+}
+
+.filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.category-filter-btn.active .filter-count {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.sort-select {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  min-width: 180px;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #9242F1;
+}
+
+.results-count {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.product-category-tag {
+  background: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.no-products {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.no-products h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.no-products p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Responsive styles for filters */
+@media (max-width: 768px) {
+  .filter-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .category-filters {
+    justify-content: center;
+  }
+  
+  .category-filter-btn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .results-count {
+    margin-left: 0;
+    text-align: center;
+  }
+  
+  .sort-select {
+    min-width: 100%;
+  }
+}
+
 .category-products {
   padding: 80px 20px;
   max-width: 1400px;
@@ -1265,7 +1438,7 @@ html {
 
 .category-products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 30px;
 }
 
@@ -1392,7 +1565,7 @@ html {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
 }
 
@@ -2013,7 +2186,7 @@ html {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 30px;
   padding: 0 20px;
 }

@@ -11,7 +11,6 @@ import ProductDetails from './pages/product/ProductDetails';
 import ImageEditor from './ImageEditor';
 
 // Import admin pages
-import AdminLogin from './pages/admin/AdminLogin';
 import Dashboard from './pages/admin/Dashboard';
 import ProductManagement from './pages/admin/ProductManagement';
 import OrderManagement from './pages/admin/OrderManagement';
@@ -82,9 +81,6 @@ function App() {
         <Route path="/editor" element={<Main><ImageEditor onBack={() => window.history.back()} /></Main>} />
         <Route path="/gifts" element={<Main><GiftsPage /></Main>} />
         <Route path="/checkout" element={<Main><CheckoutPage /></Main>} />
-
-        {/* Admin Login */}
-        <Route path="/admin/login" element={<AdminLogin />} />
 
         {/* Admin Routes with Admin Layout */}
         <Route path="/admin" element={<AdminLayout />}>

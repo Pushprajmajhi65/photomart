@@ -1,11 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import html2canvas from 'html2canvas';
-import TemplateSelector from './components/editor/TemplateSelector';
 import SlotControls from './components/editor/SlotControls';
 import PreviewHeaderActions from './components/common/PreviewHeaderActions';
 import TransformControls from './components/editor/TransformControls';
-import ColorEffects from './components/editor/ColorEffects';
 import CropTool from './components/editor/CropTool';
 import ThreeCanvasPreview from './ThreeCanvasPreview';
 import './ImageEditor.css';
@@ -33,37 +31,16 @@ function ImageEditor({ onBack }) {
   const [showCropTool, setShowCropTool] = useState(false);
   const [showBackView, setShowBackView] = useState(false);
   const [canvasRotationY, setCanvasRotationY] = useState(0);
-  const [useThreePreview, setUseThreePreview] = useState(true);
+  const [useThreePreview, setUseThreePreview] = useState(false);
   const [useSimple2D, setUseSimple2D] = useState(false);
 
-  // Collage templates (percent-based slots)
+  // Single photo template (simplified)
   const SLOT_DEFAULT_SCALE = 1.0; // fit entire image initially
   const templates = [
-    { id: 'single', name: 'Single Photo', slots: [{ x: 5, y: 5, w: 90, h: 90 }] },
-    { id: 'two-vertical', name: '2 Photos (Vertical Split)', slots: [
-      { x: 5, y: 5, w: 42.5, h: 90 }, { x: 52.5, y: 5, w: 42.5, h: 90 }
-    ]},
-    { id: 'two-horizontal', name: '2 Photos (Horizontal Split)', slots: [
-      { x: 5, y: 5, w: 90, h: 42.5 }, { x: 5, y: 52.5, w: 90, h: 42.5 }
-    ]},
-    { id: 'three-1-2', name: '3 Photos (1 Top, 2 Bottom)', slots: [
-      { x: 8, y: 6, w: 84, h: 48 }, { x: 8, y: 58, w: 40, h: 32 }, { x: 52, y: 58, w: 40, h: 32 }
-    ]},
-    { id: 'four-grid', name: '4 Photos (Grid)', slots: [
-      { x: 6, y: 6, w: 42, h: 42 }, { x: 52, y: 6, w: 42, h: 42 }, { x: 6, y: 52, w: 42, h: 42 }, { x: 52, y: 52, w: 42, h: 42 }
-    ]},
-    { id: 'five-mosaic', name: '5 Photos (Mosaic)', slots: [
-      { x: 6, y: 6, w: 56, h: 56 }, { x: 64, y: 6, w: 30, h: 26 }, { x: 64, y: 36, w: 30, h: 26 }, { x: 6, y: 66, w: 42, h: 28 }, { x: 50, y: 66, w: 44, h: 28 }
-    ]},
-    { id: 'six-grid', name: '6 Photos (Grid)', slots: [
-      { x: 5, y: 5, w: 28.5, h: 42 }, { x: 35.75, y: 5, w: 28.5, h: 42 }, { x: 66.5, y: 5, w: 28.5, h: 42 },
-      { x: 5, y: 53, w: 28.5, h: 42 }, { x: 35.75, y: 53, w: 28.5, h: 42 }, { x: 66.5, y: 53, w: 28.5, h: 42 }
-    ]}
+    { id: 'single', name: 'Single Photo', slots: [{ x: 5, y: 5, w: 90, h: 90 }] }
   ];
-  const [selectedTemplate, setSelectedTemplate] = useState('single');
+  const [selectedTemplate] = useState('single');
   const [activeSlot, setActiveSlot] = useState(0);
-  const [isCollageMode, setIsCollageMode] = useState(false);
-  const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [slotStates, setSlotStates] = useState(() => ({
     0: { src: null, pos: { x: 0, y: 0 }, scale: SLOT_DEFAULT_SCALE, rot: 0 }
   }));
@@ -72,8 +49,9 @@ function ImageEditor({ onBack }) {
   const slotFileInputRef = useRef(null);
   const previewRef = useRef(null);
   const captureRef = useRef(null);
+  const imageContainerRef = useRef(null);
 
-  // Frame options similar to Whitewall
+  // Simplified frame options - keeping only one
   const frameOptions = [
     {
       id: 'black-wood',
@@ -83,51 +61,6 @@ function ImageEditor({ onBack }) {
       thickness: 25,
       price: 0,
       preview: 'linear-gradient(135deg, #2C2C2C, #1A1A1A)'
-    },
-    {
-      id: 'white-wood',
-      name: 'White Wood Frame',
-      type: 'wood',
-      color: '#F8F8F8',
-      thickness: 25,
-      price: 100,
-      preview: 'linear-gradient(135deg, #F8F8F8, #E8E8E8)'
-    },
-    {
-      id: 'natural-wood',
-      name: 'Natural Wood Frame',
-      type: 'wood',
-      color: '#8B5E3C',
-      thickness: 25,
-      price: 150,
-      preview: 'linear-gradient(135deg, #8B5E3C, #6B3E2E)'
-    },
-    {
-      id: 'gold-frame',
-      name: 'Gold Frame',
-      type: 'metal',
-      color: '#D4AF37',
-      thickness: 20,
-      price: 300,
-      preview: 'linear-gradient(135deg, #D4AF37, #B8860B)'
-    },
-    {
-      id: 'silver-frame',
-      name: 'Silver Frame',
-      type: 'metal',
-      color: '#C0C0C0',
-      thickness: 20,
-      price: 250,
-      preview: 'linear-gradient(135deg, #C0C0C0, #A0A0A0)'
-    },
-    {
-      id: 'no-frame',
-      name: 'No Frame',
-      type: 'none',
-      color: 'transparent',
-      thickness: 0,
-      price: -200,
-      preview: 'transparent'
     }
   ];
 
@@ -285,10 +218,56 @@ function ImageEditor({ onBack }) {
     reader.readAsDataURL(file);
   };
 
-  const applyCrop = () => {
-    // In a real implementation, this would crop the actual image
-    setCropMode(false);
-    setShowCropTool(false);
+  const applyCrop = async () => {
+    try {
+      const containerNode = imageContainerRef.current || previewRef.current;
+      if (!containerNode) return;
+
+      const rect = containerNode.getBoundingClientRect();
+      const cropPx = {
+        x: Math.round((cropArea.x / 100) * rect.width),
+        y: Math.round((cropArea.y / 100) * rect.height),
+        w: Math.round((cropArea.width / 100) * rect.width),
+        h: Math.round((cropArea.height / 100) * rect.height)
+      };
+
+      // Render only the image container (so frame/borders are excluded)
+      const fullCanvas = await html2canvas(containerNode, {
+        backgroundColor: null,
+        useCORS: true,
+        scale: 2
+      });
+
+      const outCanvas = document.createElement('canvas');
+      outCanvas.width = cropPx.w * 2; // account for scale:2 above
+      outCanvas.height = cropPx.h * 2;
+      const ctx = outCanvas.getContext('2d');
+      ctx.drawImage(
+        fullCanvas,
+        cropPx.x * 2,
+        cropPx.y * 2,
+        cropPx.w * 2,
+        cropPx.h * 2,
+        0,
+        0,
+        cropPx.w * 2,
+        cropPx.h * 2
+      );
+
+      const croppedDataUrl = outCanvas.toDataURL('image/png');
+
+      // Apply cropped image and reset transforms
+      setUploadedImage(croppedDataUrl);
+      setImagePosition({ x: 0, y: 0 });
+      setImageScale(1.0);
+      setImageRotation(0);
+      setCropMode(false);
+      setShowCropTool(false);
+    } catch (err) {
+      console.error('Error applying crop:', err);
+      setCropMode(false);
+      setShowCropTool(false);
+    }
   };
 
   const cancelCrop = () => {
@@ -313,7 +292,7 @@ function ImageEditor({ onBack }) {
   const handleCropMouseMove = useCallback((e) => {
     if (!isDraggingCrop || !dragHandle) return;
 
-    const rect = previewRef.current?.getBoundingClientRect();
+    const rect = (imageContainerRef.current || previewRef.current)?.getBoundingClientRect();
     if (!rect) return;
 
     const deltaX = ((e.clientX - dragStart.x) / rect.width) * 100;
@@ -430,16 +409,6 @@ function ImageEditor({ onBack }) {
       <div className="editor-content">
         {/* Left Sidebar - Controls */}
         <div className="editor-sidebar">
-          {/* Templates */}
-          <TemplateSelector
-            templates={templates}
-            selectedTemplate={selectedTemplate}
-            onSelect={(tpl)=>{ setSelectedTemplate(tpl.id); initSlotsForTemplate(tpl.id); setIsCollageMode(tpl.slots.length>1); }}
-            showTemplateSelector={showTemplateSelector}
-            setShowTemplateSelector={setShowTemplateSelector}
-            getCurrentTemplate={getCurrentTemplate}
-          />
-
           {/* Active Slot Controls */}
           {getCurrentTemplate()?.slots?.length > 1 && (
             <>
@@ -479,7 +448,8 @@ function ImageEditor({ onBack }) {
             />
           </div>
 
-          {/* Frame Selection */}
+          {/* Frame Selection - HIDDEN */}
+          {false && (
           <div className="editor-section">
             <h3>2. Choose Frame</h3>
             <motion.button 
@@ -537,6 +507,7 @@ function ImageEditor({ onBack }) {
               )}
             </AnimatePresence>
           </div>
+          )}
 
           {/* Size Selection */}
           <div className="editor-section">
@@ -588,6 +559,8 @@ function ImageEditor({ onBack }) {
           {/* Image Adjustments */}
           {uploadedImage && (
             <>
+              {/* Transform Image - HIDDEN */}
+              {false && (
               <div className="editor-section">
                 <h3>4. Transform Image</h3>
                 
@@ -687,12 +660,12 @@ function ImageEditor({ onBack }) {
                       exit={{ opacity: 0, height: 0 }}
                     >
                       <div className="adjustment-group">
-                        <label>Scale: {imageScale.toFixed(2)}x</label>
+                        <label>Zoom: {Math.round(imageScale * 100)}%</label>
                         <input
                           type="range"
                           min="0.1"
                           max="5"
-                          step="0.1"
+                          step="0.05"
                           value={imageScale}
                           onChange={(e) => setImageScale(parseFloat(e.target.value))}
                           className="adjustment-slider"
@@ -723,8 +696,11 @@ function ImageEditor({ onBack }) {
                   )}
                 </AnimatePresence>
               </div>
+              )}
 
               {/* Color Adjustments */}
+              {/* Color & Effects - HIDDEN */}
+              {false && (
               <div className="editor-section">
                 <h3>5. Color & Effects</h3>
                 <motion.button 
@@ -814,6 +790,34 @@ function ImageEditor({ onBack }) {
                   )}
                 </AnimatePresence>
               </div>
+              )}
+
+              {/* Minimal Zoom & Position */}
+              <div className="editor-section">
+                <h3>Image Zoom & Position</h3>
+                <div className="image-adjustments">
+                  <div className="adjustment-group">
+                    <label>Zoom: {Math.round(imageScale * 100)}%</label>
+                    <input
+                      type="range"
+                      min="0.1"
+                      max="5"
+                      step="0.05"
+                      value={imageScale}
+                      onChange={(e) => setImageScale(parseFloat(e.target.value))}
+                      className="adjustment-slider"
+                    />
+                  </div>
+                  <div className="adjustment-hint">Drag the image in the preview to adjust position.</div>
+                  <motion.button
+                    className="reset-btn"
+                    onClick={() => { setImagePosition({ x: 0, y: 0 }); setImageScale(1.0); }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    Reset Zoom & Position
+                  </motion.button>
+                </div>
+              </div>
 
               {/* Crop Tool */}
               <div className="editor-section">
@@ -841,59 +845,9 @@ function ImageEditor({ onBack }) {
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                     >
-                      <div className="crop-presets">
-                        <h4>Crop Presets:</h4>
-                        <div className="preset-buttons">
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 10, y: 10, width: 80, height: 80 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            Square (1:1)
-                          </motion.button>
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 5, y: 20, width: 90, height: 60 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            16:9
-                          </motion.button>
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 15, y: 5, width: 70, height: 90 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            4:5
-                          </motion.button>
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 10, y: 15, width: 80, height: 70 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            3:2
-                          </motion.button>
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 5, y: 10, width: 90, height: 80 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            Full Width
-                          </motion.button>
-                          <motion.button
-                            className="preset-btn"
-                            onClick={() => setCropArea({ x: 5, y: 5, width: 90, height: 90 })}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            Reset
-                          </motion.button>
-                        </div>
-                        
-                        <div className="manual-crop-info">
-                          <h4>Manual Crop:</h4>
-                          <p>• Drag corners to resize</p>
-                          <p>• Drag center to move</p>
-                          <p>• Use presets for common ratios</p>
-                        </div>
+                      <div className="manual-crop-info">
+                        <h4>Manual Crop</h4>
+                        <p>Drag corners to resize. Drag inside to move.</p>
                       </div>
 
                       <div className="crop-actions">
@@ -981,7 +935,7 @@ function ImageEditor({ onBack }) {
                 }}
                 ref={captureRef}
               >
-                  <div className="image-container" onClick={() => {
+                  <div className="image-container" ref={imageContainerRef} onClick={() => {
                     if ((getCurrentTemplate()?.slots?.length || 1) > 1 && !slotStates[activeSlot]?.src) {
                       slotFileInputRef.current?.click();
                     }
